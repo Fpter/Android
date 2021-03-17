@@ -1,0 +1,113 @@
+{
+  "project_info": {
+    "project_number": "951618873720",
+    "project_id": "chat-app-7b3e9",
+    "storage_bucket": "chat-app-7b3e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951618873720:android:31be2949e29befab3f808d",
+        "android_client_info": {
+          "package_name": "Chat.Commet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951618873720-nf3772kuhif1jkud458qkivpruur0qoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFP8R9JPb0bQg2EDsjIiFBi1mx-URgbmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951618873720-nf3772kuhif1jkud458qkivpruur0qoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951618873720:android:5ca1362c3e5612843f808d",
+        "android_client_info": {
+          "package_name": "com.cometchat.pro.uikit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951618873720-p0es64at1qh94m03p8v3etst2t9h1qdg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cometchat.pro.uikit",
+            "certificate_hash": "f17f5acf2b08d60a92ee86a75e3a8d8fe3df5e4b"
+          }
+        },
+        {
+          "client_id": "951618873720-nf3772kuhif1jkud458qkivpruur0qoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFP8R9JPb0bQg2EDsjIiFBi1mx-URgbmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951618873720-nf3772kuhif1jkud458qkivpruur0qoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:951618873720:android:b9ca219facc0857b3f808d",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "951618873720-8gssfem387gnbk072a99l31ai7kr17vc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "f17f5acf2b08d60a92ee86a75e3a8d8fe3df5e4b"
+          }
+        },
+        {
+          "client_id": "951618873720-nf3772kuhif1jkud458qkivpruur0qoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFP8R9JPb0bQg2EDsjIiFBi1mx-URgbmk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "951618873720-nf3772kuhif1jkud458qkivpruur0qoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
