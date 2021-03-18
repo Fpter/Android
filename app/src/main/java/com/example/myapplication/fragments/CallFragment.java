@@ -1,18 +1,28 @@
 package com.example.myapplication.fragments;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.cometchat.pro.uikit.Settings.UISettings;
+import com.example.myapplication.NewCallList;
 import com.example.myapplication.R;
+import com.google.android.material.tabs.TabLayout;
 
+import adapter.TabAdapter;
 import screen.CometChatUserCallListScreenActivity;
+import screen.call.AllCall;
+import screen.call.MissedCall;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +30,9 @@ import screen.CometChatUserCallListScreenActivity;
  * create an instance of this fragment.
  */
 public class CallFragment extends Fragment {
-
+    private TabLayout tabLayout;
+    private TabAdapter tabAdapter;
+    private ViewPager viewPager;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,11 +82,20 @@ public class CallFragment extends Fragment {
         addPhoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), CometChatUserCallListScreenActivity.class);
+                Intent intent = new Intent(getContext(), NewCallList.class);
                 startActivity(intent);
             }
         });
 
+        viewPager = view.findViewById(R.id.viewPager);
+        tabLayout = view.findViewById(R.id.tabLayout);
+
+        if (getActivity() != null) {
+            tabAdapter = new TabAdapter(getActivity().getSupportFragmentManager());
+            tabAdapter.addFragment(new AllCall(), getContext().getResources().getString(com.cometchat.pro.uikit.R.string.all));
+            tabAdapter.addFragment(new MissedCall(), getContext().getResources().getString(com.cometchat.pro.uikit.R.string.missed));
+            viewPager.setAdapter(tabAdapter);
+        }
 
         return view;
     }

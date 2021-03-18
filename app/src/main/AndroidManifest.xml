@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapplication">
+
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+        <activity android:name=".NewCallList"></activity>
+
         <receiver android:name=".utils.ActionReceiver" />
+
         <service
             android:name=".MyFirebaseMessagingService"
             android:directBootAware="true"
@@ -23,24 +27,22 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".SendNotification.FirebaseService"
-                android:permission="com.google.android.c2dm.permission.SEND"
-
-            >
+        <service
+            android:name=".SendNotification.FirebaseService"
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
             </intent-filter>
-
-        </service>
-        <!-- <activity android:name=".FirebaseDemo"></activity> -->
+        </service> <!-- <activity android:name=".FirebaseDemo"></activity> -->
         <activity android:name=".CallHistoryActivity" />
         <activity android:name=".CreateUserActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".UserChatActivity"
+        <activity
+            android:name=".UserChatActivity"
+            android:excludeFromRecents="true"
             android:launchMode="singleTask"
-            android:taskAffinity=""
-            android:excludeFromRecents="true"/>
+            android:taskAffinity="" />
         <activity android:name=".MenuChatActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".GroupListActivity" />

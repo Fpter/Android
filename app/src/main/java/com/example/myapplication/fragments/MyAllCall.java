@@ -12,10 +12,10 @@ import com.example.myapplication.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link NewCallListFragment#newInstance} factory method to
+ * Use the {@link MyAllCall#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewCallListFragment extends Fragment {
+public class MyAllCall extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +26,7 @@ public class NewCallListFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public NewCallListFragment() {
+    public MyAllCall() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class NewCallListFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment NewCallListFragment.
+     * @return A new instance of fragment MyAllCall.
      */
     // TODO: Rename and change types and number of parameters
-    public static NewCallListFragment newInstance(String param1, String param2) {
-        NewCallListFragment fragment = new NewCallListFragment();
+    public static MyAllCall newInstance(String param1, String param2) {
+        MyAllCall fragment = new MyAllCall();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +61,6 @@ public class NewCallListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_call_list, container, false);
+        return inflater.inflate(R.layout.fragment_my_all_call, container, false);
     }
 }

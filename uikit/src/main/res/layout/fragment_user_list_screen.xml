@@ -8,7 +8,6 @@
     <TextView
         android:id="@+id/tv_title"
         android:text="@string/users"
-        android:visibility="gone"
         tools:visibility="visible"
         android:textColor="@color/primaryTextColor"
         android:textSize="22sp"
@@ -18,7 +17,6 @@
         android:layout_height="wrap_content"/>
     <RelativeLayout
         android:id="@+id/rl_search_box"
-        android:visibility="gone"
         tools:visibility="visible"
         android:layout_below="@id/tv_title"
         android:layout_marginBottom="8dp"
@@ -40,7 +38,6 @@
             android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
         <ImageView
-            android:visibility="gone"
             android:clickable="true"
             android:layout_marginRight="8sp"
             android:foreground="?attr/selectableItemBackground"
@@ -70,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
-    <com.cometchat.pro.uikit.CometChatUserList
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user_list"
         app:headers="true"
         android:layout_below="@id/rl_search_box"
@@ -79,7 +76,7 @@
         tools:listitem="@layout/user_list_row"
         android:layout_height="match_parent"/>
 
-    <include layout="@layout/user_list_placeholder"/>
+    <include layout="@layout/user_list_placeholder" android:id="@+id/list_user"/>
 
 
 

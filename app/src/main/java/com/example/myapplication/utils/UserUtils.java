@@ -59,6 +59,7 @@ public class UserUtils {
         CometChat.getUnreadMessageCountForUser(uid, new CometChat.CallbackListener<HashMap<String, Integer>>() {
             @Override
             public void onSuccess(HashMap<String, Integer> hashMap) {
+                if (messageCount == null) return;
                 if (hashMap.size() > 0) {
                     messageCount.setCount(hashMap.size());
                     messageCount.setVisibility(View.VISIBLE);
