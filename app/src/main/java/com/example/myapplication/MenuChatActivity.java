@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +22,11 @@ import android.widget.Toast;
 import com.cometchat.pro.constants.CometChatConstants;
 import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.core.ConversationsRequest;
+import com.cometchat.pro.core.MessagesRequest;
 import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.BaseMessage;
+import com.cometchat.pro.models.Conversation;
 import com.cometchat.pro.models.Group;
 import com.cometchat.pro.models.TextMessage;
 import com.cometchat.pro.models.User;
@@ -35,6 +40,8 @@ import com.example.myapplication.utils.Notification;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 import screen.CometChatCallActivity;
 import screen.CometChatStartCallActivity;
@@ -50,8 +57,30 @@ public class MenuChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
-//        getSupportActionBar().hide(); // hide the title bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar().hide(); // hide the title bar
+
+         int limit = 50;
+//        ConversationsRequest conversationsRequest = new ConversationsRequest.ConversationsRequestBuilder()
+//                .setLimit(50)
+//                .setConversationType(CometChatConstants.CONVERSATION_TYPE_USER)
+//                .build();
+//
+//        conversationsRequest.fetchNext(new CometChat.CallbackListener<List<Conversation>>() {
+//            @Override
+//            public void onSuccess(List<Conversation> conversations) {
+//                // Hanlde list of conversations
+//                Log.d("conversations", conversations.toString());
+//
+//            }
+//
+//            @Override
+//            public void onError(CometChatException e) {
+//                // Hanlde failure
+//                Log.e("conversations", e.getMessage());
+//            }
+//        });
+
         setContentView(R.layout.activity_menu_chat);
         titleBar = findViewById(R.id.titleChat);
         titleBar.setText("Home");

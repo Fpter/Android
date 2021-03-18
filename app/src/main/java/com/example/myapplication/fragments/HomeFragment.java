@@ -15,11 +15,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.cometchat.pro.constants.CometChatConstants;
 import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.core.ConversationsRequest;
 import com.cometchat.pro.core.UsersRequest;
 import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.Conversation;
 import com.cometchat.pro.models.User;
 import com.example.myapplication.R;
+import com.example.myapplication.adapters.ConversationAdapter;
 import com.example.myapplication.adapters.UserAdapter;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -95,40 +99,61 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                String keyword = search_user.getText().toString();
-                UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().setSearchKeyword(keyword).setLimit(30).build();
-                usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
-                    @Override
-                    public void onSuccess(List <User> list) {
-                        updateUI(list);
-                    }
-                    @Override
-                    public void onError(CometChatException e) {
-                        Log.d("user_list", "User list fetching failed with exception: " + e.getMessage());
-                    }
-                });
+//                String keyword = search_user.getText().toString();
+//                UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().setSearchKeyword(keyword).setLimit(30).build();
+//                usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
+//                    @Override
+//                    public void onSuccess(List <User> list) {
+//                        updateUI(list);
+//                    }
+//                    @Override
+//                    public void onError(CometChatException e) {
+//                        Log.d("user_list", "User list fetching failed with exception: " + e.getMessage());
+//                    }
+//                });
             }
         });
         return view;
     }
     private void getUserList() {
-        UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().setLimit(30).build();
-        usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
+//        UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().setLimit(30).build();
+//        usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
+//            @Override
+//            public void onSuccess(List <User> list) {
+//                Log.d("user_list", "User list received: " + list.size());
+//                updateUI(list);
+//            }
+//            @Override
+//            public void onError(CometChatException e) {
+//                Log.d("user_list", "User list fetching failed with exception: " + e.getMessage());
+//            }
+//        });
+        ConversationsRequest conversationsRequest = new ConversationsRequest.ConversationsRequestBuilder().setConversationType(CometChatConstants.CONVERSATION_TYPE_USER).setLimit(50).build();
+
+        conversationsRequest.fetchNext(new CometChat.CallbackListener<List<Conversation>>() {
             @Override
-            public void onSuccess(List <User> list) {
-                Log.d("user_list", "User list received: " + list.size());
-                updateUI(list);
+            public void onSuccess(List<Conversation> conversations) {
+                // Hanlde list of conversations
+                updateUI(conversations);
+
             }
+
             @Override
             public void onError(CometChatException e) {
-                Log.d("user_list", "User list fetching failed with exception: " + e.getMessage());
+                // Hanlde failure
             }
         });
     }
-    private void updateUI(List<User> list) {
-        RecyclerView userRecyclerView = getView().findViewById(R.id.homeRecycleView);
-        userRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        UserAdapter userAdapter = new UserAdapter(list, getContext());
-        userRecyclerView.setAdapter(userAdapter);
+//    private void updateUI(List<User> list) {
+//        RecyclerView userRecyclerView = getView().findViewById(R.id.homeRecycleView);
+//        userRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        UserAdapter userAdapter = new UserAdapter(list, getContext());
+//        userRecyclerView.setAdapter(userAdapter);
+//    }
+    private void updateUI(List<Conversation> conversations) {
+        RecyclerView conversationRecyclerView = getView().findViewById(R.id.homeRecycleView);
+        conversationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        ConversationAdapter conversationAdapter = new ConversationAdapter(conversations, getContext());
+        conversationRecyclerView.setAdapter(conversationAdapter);
     }
 }

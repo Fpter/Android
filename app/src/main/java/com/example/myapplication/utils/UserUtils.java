@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.cometchat.pro.constants.CometChatConstants;
+import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.core.MessagesRequest;
 import com.cometchat.pro.exceptions.CometChatException;
@@ -72,6 +73,9 @@ public class UserUtils {
                 // handle error
             }
         });
+    }
+    public static void convertCall2Message(Call call) {
+
     }
     public static void markAsRead(BaseMessage message) {
         if(!message.getSender().getUid().equals(CometChat.getLoggedInUser().getUid()))

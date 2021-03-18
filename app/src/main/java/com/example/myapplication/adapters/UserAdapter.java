@@ -2,28 +2,21 @@ package com.example.myapplication.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.Image;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cometchat.pro.constants.CometChatConstants;
-import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.core.MessagesRequest;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.BaseMessage;
-import com.cometchat.pro.models.Group;
 import com.cometchat.pro.models.TextMessage;
 import com.cometchat.pro.models.User;
 import com.cometchat.pro.uikit.Avatar;
@@ -31,14 +24,9 @@ import com.cometchat.pro.uikit.BadgeCount;
 import com.example.myapplication.R;
 import com.example.myapplication.UserChatActivity;
 import com.example.myapplication.utils.UserUtils;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
-import listeners.CometChatCallListener;
-import utils.CallUtils;
 import utils.Utils;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {

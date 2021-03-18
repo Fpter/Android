@@ -1,5 +1,6 @@
 package screen;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -77,7 +78,7 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
 
     private TextView tvBlockUser;
 
-    private MaterialToolbar toolbar;
+//    private MaterialToolbar toolbar;
 
     private boolean isBlocked;
 
@@ -91,7 +92,7 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
 
     private RecyclerView historyRv;
 
-    private CallHistoryAdapter callHistoryAdapter;
+//    private CallHistoryAdapter callHistoryAdapter;
 
     private MessagesRequest messageRequest;
 
@@ -110,6 +111,7 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_user_detail_screen);
         fontUtils= FontUtils.getInstance(this);
         initComponent();
@@ -127,12 +129,12 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
         videoCallBtn = findViewById(R.id.video_callBtn_iv);
         addBtn = findViewById(R.id.btn_add);
         tvSendMessage = findViewById(R.id.tv_send_message);
-        toolbar= findViewById(R.id.user_detail_toolbar);
+//        toolbar= findViewById(R.id.user_detail_toolbar);
         divider1 = findViewById(R.id.divider_1);
         divider2 = findViewById(R.id.divider_2);
         divider3 = findViewById(R.id.divider_3);
 
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
          getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         addBtn.setTypeface(fontUtils.getTypeFace(FontUtils.robotoRegular));
@@ -369,15 +371,15 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
     }
 
     private void setCallHistoryAdapter(List<BaseMessage> messageList) {
-        if (callHistoryAdapter==null)
-        {
-            callHistoryAdapter = new CallHistoryAdapter(CometChatUserDetailScreenActivity.this,messageList);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,true);
-            historyRv.setLayoutManager(linearLayoutManager);
-            historyRv.setAdapter(callHistoryAdapter);
-        }
-        else
-            callHistoryAdapter.updateList(messageList);
+//        if (callHistoryAdapter==null)
+//        {
+//            callHistoryAdapter = new CallHistoryAdapter(CometChatUserDetailScreenActivity.this,messageList);
+//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,true);
+//            historyRv.setLayoutManager(linearLayoutManager);
+//            historyRv.setAdapter(callHistoryAdapter);
+//        }
+//        else
+//            callHistoryAdapter.updateList(messageList);
     }
 
     private void setBlockUnblock() {
@@ -427,6 +429,7 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
     private void kickGroupMember() {
 
         CometChat.kickGroupMember(uid, guid, new CometChat.CallbackListener<String>() {
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onSuccess(String s) {
                 if (tvBlockUser!=null)
@@ -474,6 +477,7 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
         ArrayList<String> uids = new ArrayList<>();
         uids.add(uid);
         CometChat.blockUsers(uids, new CometChat.CallbackListener<HashMap<String, String>>() {
+            @SuppressLint("StringFormatInvalid")
             @Override
             public void onSuccess(HashMap<String, String> stringStringHashMap) {
                 if (tvBlockUser!=null)

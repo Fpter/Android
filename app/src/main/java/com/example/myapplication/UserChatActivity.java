@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cometchat.pro.constants.CometChatConstants;
+import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.core.MessagesRequest;
 import com.cometchat.pro.exceptions.CometChatException;
@@ -28,6 +29,7 @@ import com.cometchat.pro.models.TextMessage;
 import com.cometchat.pro.models.User;
 import com.cometchat.pro.uikit.Avatar;
 import com.example.myapplication.fragments.HomeFragment;
+import com.example.myapplication.models.CallWrapper;
 import com.example.myapplication.models.MessageWrapper;
 import com.example.myapplication.utils.Constants;
 import com.example.myapplication.utils.UserUtils;
@@ -44,7 +46,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import constant.StringContract;
 import listeners.CometChatCallListener;
+import screen.CometChatUserDetailScreenActivity;
 
 public class UserChatActivity extends AppCompatActivity {
     private ImageView backBtn;
@@ -77,10 +81,34 @@ public class UserChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-//        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
         setContentView(R.layout.activity_user_chat);
         Intent intent = getIntent();
         ava = findViewById(R.id.iv_chat_avatar);
+        ava.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CometChat.getUser(chatId, new CometChat.CallbackListener<User>() {
+                    @Override
+                    public void onSuccess(User user) {
+                        Log.d("get_user", "User details fetched for user: " + user.toString());
+                        Intent intent = new Intent(getApplicationContext(), CometChatUserDetailScreenActivity.class);
+                        intent.putExtra(StringContract.IntentStrings.UID, user.getUid());
+                        intent.putExtra(StringContract.IntentStrings.NAME, user.getName());
+                        intent.putExtra(StringContract.IntentStrings.AVATAR, user.getAvatar());
+                        intent.putExtra(StringContract.IntentStrings.STATUS, user.getStatus());
+                        intent.putExtra(StringContract.IntentStrings.IS_BLOCKED_BY_ME, user.isBlockedByMe());
+                        intent.putExtra(StringContract.IntentStrings.FROM_CALL_LIST, true);
+                        startActivity(intent);
+                    }
+                    @Override
+                    public void onError(CometChatException e) {
+                        Log.d("get_user", "User details fetching failed with exception: " + e.getMessage());
+                    }
+                });
+
+            }
+        });
         if (intent != null) {
             chatId = intent.getStringExtra(Constants.CHAT_ID);
             chatName = intent.getStringExtra(Constants.CHAT_NAME);
@@ -182,6 +210,8 @@ public class UserChatActivity extends AppCompatActivity {
             if(message instanceof TextMessage) {
                 messageList.add(new MessageWrapper((TextMessage) message));
                 UserUtils.markAsRead(message);
+            }else if(message instanceof Call) {
+                messageList.add(new CallWrapper((Call)message));
             }
         }
         adapter.addToEnd(messageList, true);
