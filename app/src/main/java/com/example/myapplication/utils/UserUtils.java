@@ -13,8 +13,11 @@ import com.cometchat.pro.models.TextMessage;
 import com.cometchat.pro.models.User;
 import com.cometchat.pro.uikit.BadgeCount;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import kotlin.collections.ArrayDeque;
 
 public class UserUtils {
     static User user_rs = null;
@@ -58,7 +61,7 @@ public class UserUtils {
                 if (hashMap.size() > 0) {
                     messageCount.setCount(hashMap.size());
                     messageCount.setVisibility(View.VISIBLE);
-                    messageCount.setCountBackground(Color.RED);
+//                    messageCount.setCountBackground(Color.RED);
                 }else {
                     messageCount.setVisibility(View.GONE);
                 }
@@ -74,4 +77,5 @@ public class UserUtils {
         if(!message.getSender().getUid().equals(CometChat.getLoggedInUser().getUid()))
         CometChat.markAsRead(message.getId(),message.getSender().getUid(), CometChatConstants.RECEIVER_TYPE_USER);
     }
+
 }

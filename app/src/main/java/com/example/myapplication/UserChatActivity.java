@@ -81,7 +81,6 @@ public class UserChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_chat);
         Intent intent = getIntent();
         ava = findViewById(R.id.iv_chat_avatar);
-//        CometChatCallListener.addCallListener("LISTEN_CALL",this.getApplicationContext());
         if (intent != null) {
             chatId = intent.getStringExtra(Constants.CHAT_ID);
             chatName = intent.getStringExtra(Constants.CHAT_NAME);
@@ -95,22 +94,14 @@ public class UserChatActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                Fragment currentFragment = getFragmentManager().findFragmentByTag("homeFragment");
-//                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                fragmentTransaction.detach(currentFragment);
-//                fragmentTransaction.attach(currentFragment);
-//                fragmentTransaction.commit();
-//                onBackPressed();
                 Intent intent = new Intent(getApplicationContext(), MenuChatActivity.class);
                 startActivity(intent);
                 finish();
-//                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
             }
         });
         initViews();
         addListener();
-        fetchPrevious();
+        fetchPrevious(chatId, 20);
     }
 
     private void addListener() {
@@ -169,8 +160,8 @@ public class UserChatActivity extends AppCompatActivity {
 
     }
 
-    private void fetchPrevious() {
-        MessagesRequest messagesRequest = new MessagesRequest.MessagesRequestBuilder().setUID(chatId).setLimit(20).build();
+    private void fetchPrevious(String uid, int limit) {
+        MessagesRequest messagesRequest = new MessagesRequest.MessagesRequestBuilder().setUID(uid).setLimit(limit).build();
         messagesRequest.fetchPrevious(new CometChat.CallbackListener<List<BaseMessage>>() {
             @Override
             public void onSuccess(List<BaseMessage> list) {

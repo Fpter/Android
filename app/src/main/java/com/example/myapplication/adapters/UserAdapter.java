@@ -1,5 +1,6 @@
 package com.example.myapplication.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.media.Image;
 import android.net.Uri;
@@ -19,8 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.cometchat.pro.constants.CometChatConstants;
 import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
+import com.cometchat.pro.core.MessagesRequest;
 import com.cometchat.pro.exceptions.CometChatException;
+import com.cometchat.pro.models.BaseMessage;
 import com.cometchat.pro.models.Group;
+import com.cometchat.pro.models.TextMessage;
 import com.cometchat.pro.models.User;
 import com.cometchat.pro.uikit.Avatar;
 import com.cometchat.pro.uikit.BadgeCount;
@@ -35,6 +39,7 @@ import java.util.List;
 
 import listeners.CometChatCallListener;
 import utils.CallUtils;
+import utils.Utils;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     List<User> users;
@@ -60,7 +65,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        private TextView username;
+        private TextView username, lastMessage, messageTime;
         private Avatar avatar;
         private ImageView callBtn;
         private RelativeLayout containerLayout;
@@ -72,9 +77,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             avatar = itemView.findViewById(R.id.av_user);
             containerLayout = itemView.findViewById(R.id.conversation_holder);
             messageCount = itemView.findViewById(R.id.messageCount);
+            lastMessage = itemView.findViewById(R.id.txt_user_message);
+            messageTime = itemView.findViewById(R.id.messageTime);
 //            callBtn = itemView.findViewById(R.id.call_iv);
-
-
         }
         public void bind(User user) {
             username.setText(user.getName());
@@ -82,6 +87,28 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
             containerLayout.setOnClickListener(view -> UserChatActivity.start(context, user.getUid(), user.getName(), user.getAvatar()));
             UserUtils.getMissedMessage(user.getUid(), messageCount);
+            MessagesRequest messagesRequest = new MessagesRequest.MessagesRequestBuilder().setUID(user.getUid()).setLimit(1).build();
+            messagesRequest.fetchPrevious(new CometChat.CallbackListener<List<BaseMessage>>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onSuccess(List<BaseMessage> list) {
+                    if(list.size() > 0) {
+                        BaseMessage message = list.get(list.size()-1);
+                        User sender = message.getSender();
+                        String nameSender = sender == CometChat.getLoggedInUser() ? "You" : sender.getName();
+                        if(message instanceof  TextMessage) {
+                            lastMessage.setText(nameSender + " : " +((TextMessage)message).getText());
+                            messageTime.setText(Utils.getLastMessageDate(message.getSentAt()*1000L));
+                        }
+//                        lastMessage.setText(message.);
+                    }
+                    Log.d("get_lastmessage", "Text message received successfully: ");
+                }
+                @Override
+                public void onError(CometChatException e) {
+                    Log.d("get_lastmessage", "Message fetching failed with exception: " + e.getMessage());
+                }
+            });
 
 //            callBtn.setOnClickListener(new View.OnClickListener() {
 //                @Override
