@@ -30,6 +30,8 @@ import com.cometchat.pro.models.Conversation;
 import com.cometchat.pro.models.Group;
 import com.cometchat.pro.models.TextMessage;
 import com.cometchat.pro.models.User;
+import com.cometchat.pro.uikit.CometChatCallList;
+import com.example.myapplication.fragments.CallFragment;
 import com.example.myapplication.fragments.CallListFragment;
 import com.example.myapplication.fragments.GroupFragment;
 import com.example.myapplication.fragments.HomeFragment;
@@ -45,6 +47,7 @@ import java.util.List;
 
 import screen.CometChatCallActivity;
 import screen.CometChatStartCallActivity;
+import screen.call.CometChatCallListScreen;
 import utils.CallUtils;
 
 public class MenuChatActivity extends AppCompatActivity {
@@ -112,7 +115,7 @@ public class MenuChatActivity extends AppCompatActivity {
                         titleBar.setText("Group");
                         break;
                     case R.id.nav_message:
-                        selectedFrag = new MessageFragment();
+                        selectedFrag = new CallFragment();
                         titleBar.setText("Call");
                         break;
                     case R.id.nav_info:
