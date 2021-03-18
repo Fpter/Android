@@ -97,6 +97,7 @@ public class MenuChatActivity extends AppCompatActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
         bottomNav.setSelectedItemId(R.id.nav_home);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
+        titleBar.setText("Conversations");
         bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -104,7 +105,7 @@ public class MenuChatActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         selectedFrag = new HomeFragment();
-                        titleBar.setText("Home");
+                        titleBar.setText("Conversations");
                         break;
                     case R.id.nav_group:
                         selectedFrag = new GroupFragment();
@@ -112,7 +113,7 @@ public class MenuChatActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_message:
                         selectedFrag = new MessageFragment();
-                        titleBar.setText("Message");
+                        titleBar.setText("Call");
                         break;
                     case R.id.nav_info:
                         selectedFrag = new MoreInfoFragment();
