@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
-    <com.cometchat.pro.uikit.CometChatCallList
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/callList_rv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -30,4 +30,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+    <include layout="@layout/conversation_shimmer"/>
 </RelativeLayout>

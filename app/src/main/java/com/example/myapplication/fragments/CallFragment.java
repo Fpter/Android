@@ -1,6 +1,7 @@
 package com.example.myapplication.fragments;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -92,11 +93,45 @@ public class CallFragment extends Fragment {
 
         if (getActivity() != null) {
             tabAdapter = new TabAdapter(getActivity().getSupportFragmentManager());
-            tabAdapter.addFragment(new AllCall(), getContext().getResources().getString(com.cometchat.pro.uikit.R.string.all));
-            tabAdapter.addFragment(new MissedCall(), getContext().getResources().getString(com.cometchat.pro.uikit.R.string.missed));
+            tabAdapter.addFragment(new MyAllCall(), getContext().getResources().getString(com.cometchat.pro.uikit.R.string.all));
+            tabAdapter.addFragment(new MyMissedCall(), getContext().getResources().getString(com.cometchat.pro.uikit.R.string.missed));
             viewPager.setAdapter(tabAdapter);
         }
+        tabLayout.setupWithViewPager(viewPager);
+        if (UISettings.getColor()!=null) {
+            Drawable wrappedDrawable = DrawableCompat.wrap(getResources().
+                    getDrawable(com.cometchat.pro.uikit.R.drawable.tab_layout_background_active));
+            DrawableCompat.setTint(wrappedDrawable, Color.parseColor(UISettings.getColor()));
+            tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).view.setBackground(wrappedDrawable);
+            tabLayout.setSelectedTabIndicatorColor(Color.parseColor(UISettings.getColor()));
+        } else {
+            tabLayout.getTabAt(tabLayout.getSelectedTabPosition()).
+                    view.setBackgroundColor(getResources().getColor(com.cometchat.pro.uikit.R.color.colorPrimary));
+            tabLayout.setSelectedTabIndicatorColor(getResources().getColor(com.cometchat.pro.uikit.R.color.colorPrimary));
+        }
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                if (UISettings.getColor()!=null) {
+                    Drawable wrappedDrawable = DrawableCompat.wrap(getResources().
+                            getDrawable(com.cometchat.pro.uikit.R.drawable.tab_layout_background_active));
+                    DrawableCompat.setTint(wrappedDrawable, Color.parseColor(UISettings.getColor()));
+                    tab.view.setBackground(wrappedDrawable);
+                }
+                else
+                    tab.view.setBackgroundColor(getResources().getColor(com.cometchat.pro.uikit.R.color.colorPrimary));
+            }
 
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                tab.view.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
         return view;
     }
 }

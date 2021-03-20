@@ -25,9 +25,11 @@ import com.cometchat.pro.models.User;
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.ConversationAdapter;
 import com.example.myapplication.adapters.UserAdapter;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,6 +38,7 @@ import java.util.List;
  */
 public class HomeFragment extends Fragment {
     private ImageView backBtn;
+    private ShimmerFrameLayout shimmer_layout;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,7 +88,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         EditText search_user = view.findViewById(R.id.search_user);
-
+        shimmer_layout = view.findViewById(R.id.shimmer_layout);
         search_user.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -116,24 +119,16 @@ public class HomeFragment extends Fragment {
         return view;
     }
     private void getUserList() {
-//        UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().setLimit(30).build();
-//        usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
-//            @Override
-//            public void onSuccess(List <User> list) {
-//                Log.d("user_list", "User list received: " + list.size());
-//                updateUI(list);
-//            }
-//            @Override
-//            public void onError(CometChatException e) {
-//                Log.d("user_list", "User list fetching failed with exception: " + e.getMessage());
-//            }
-//        });
+
         ConversationsRequest conversationsRequest = new ConversationsRequest.ConversationsRequestBuilder().setConversationType(CometChatConstants.CONVERSATION_TYPE_USER).setLimit(50).build();
 
         conversationsRequest.fetchNext(new CometChat.CallbackListener<List<Conversation>>() {
             @Override
             public void onSuccess(List<Conversation> conversations) {
-                // Hanlde list of conversations
+//                 Hanlde list of conversations
+                Log.d("conversation", conversations.size() + "");
+                shimmer_layout.stopShimmer();
+                shimmer_layout.setVisibility(View.GONE);
                 updateUI(conversations);
 
             }
@@ -144,16 +139,17 @@ public class HomeFragment extends Fragment {
             }
         });
     }
-//    private void updateUI(List<User> list) {
-//        RecyclerView userRecyclerView = getView().findViewById(R.id.homeRecycleView);
-//        userRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        UserAdapter userAdapter = new UserAdapter(list, getContext());
-//        userRecyclerView.setAdapter(userAdapter);
-//    }
+
     private void updateUI(List<Conversation> conversations) {
-        RecyclerView conversationRecyclerView = getView().findViewById(R.id.homeRecycleView);
-        conversationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        ConversationAdapter conversationAdapter = new ConversationAdapter(conversations, getContext());
-        conversationRecyclerView.setAdapter(conversationAdapter);
+        try {
+            RecyclerView conversationRecyclerView = getView().findViewById(R.id.homeRecycleView);
+
+            conversationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            ConversationAdapter conversationAdapter = new ConversationAdapter(conversations, getContext());
+            conversationRecyclerView.setAdapter(conversationAdapter);
+        }catch (Exception e) {
+
+        }
+
     }
 }

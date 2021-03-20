@@ -13,6 +13,7 @@
         <com.cometchat.pro.uikit.Avatar
             android:id="@+id/av_user"
             android:layout_width="40dp"
+            android:background="@color/shimmer"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
@@ -27,6 +28,7 @@
             android:layout_alignTop="@id/av_user"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
+            android:background="@color/shimmer"
             android:layout_toEndOf="@id/av_user"
             android:maxLines="1"
             android:textSize="@dimen/name"
@@ -34,6 +36,7 @@
 
         <TextView
             android:id="@+id/txt_user_message"
+            android:background="@color/shimmer"
             android:layout_width="262dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/txt_user_name"
@@ -59,6 +62,7 @@
 
         <TextView
             android:gravity="right"
+            android:background="@color/shimmer"
             android:id="@+id/messageTime"
             android:layout_width="69dp"
             android:layout_height="wrap_content"
@@ -70,6 +74,7 @@
         <com.cometchat.pro.uikit.BadgeCount
             android:visibility="visible"
             tools:visibility="visible"
+
             android:id="@+id/messageCount"
             android:layout_width="wrap_content"
             android:layout_marginEnd="16dp"

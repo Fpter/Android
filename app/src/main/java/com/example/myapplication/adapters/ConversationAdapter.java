@@ -33,7 +33,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
     @NonNull
     @Override
     public ConversationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ConversationAdapter.ConversationViewHolder(LayoutInflater.from(context).inflate(R.layout.conversation_placeholder, parent, false));
+        return new ConversationAdapter.ConversationViewHolder(LayoutInflater.from(context).inflate(R.layout.conversation_layout_custom, parent, false));
 
     }
     public ConversationAdapter(List<Conversation> conversations, Context context){

@@ -143,9 +143,14 @@ public class GroupFragment extends Fragment {
     }
 
     private void updateUI(List<Group> list) {
-        RecyclerView groupRecyclerView = getView().findViewById(R.id.groupRecycleView);
-        groupRecyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
-        GroupAdapter groupAdapter = new GroupAdapter(list, getContext());
-        groupRecyclerView.setAdapter(groupAdapter);
+        try{
+            RecyclerView groupRecyclerView = getView().findViewById(R.id.groupRecycleView);
+            groupRecyclerView.setLayoutManager(new LinearLayoutManager(getView().getContext()));
+            GroupAdapter groupAdapter = new GroupAdapter(list, getContext());
+            groupRecyclerView.setAdapter(groupAdapter);
+        }catch (Exception e) {
+
+        }
+
     }
 }

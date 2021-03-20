@@ -6,10 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +22,17 @@ import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.User;
 import com.example.myapplication.utils.Constants;
 import com.example.myapplication.utils.UserUtils;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
 import utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
+    private ProgressBar progressBar;
+    private TextInputLayout inputLayout;
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
         context.startActivity(starter);
@@ -41,9 +48,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        TextInputEditText userId = findViewById(R.id.userId);
+        TextInputEditText userId = findViewById(R.id.userID);
         Button loginBtn = findViewById(R.id.submitBtn);
         Button signUpBtn = findViewById(R.id.signupbtn);
+        progressBar = findViewById(R.id.loginProgress);
+        inputLayout = findViewById(R.id.inputUID);
+        userId.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if(actionId == EditorInfo.IME_ACTION_DONE){
+                    if(userId.getText().toString().isEmpty()) {
+                        Toast.makeText(MainActivity.this, "Fill username field", Toast.LENGTH_LONG).show();
+                    }else{
+                        progressBar.setVisibility(View.VISIBLE);
+                        inputLayout.setEndIconVisible(false);
+                        login(userId.getText().toString());
+                    }
+                }
+                return true;
+            }
+        });
+        inputLayout.setEndIconOnClickListener(view -> {
+            if (userId.getText().toString().isEmpty()) {
+                Toast.makeText(MainActivity.this, "Fill Username field", Toast.LENGTH_LONG).show();
+            }
+            else {
+                findViewById(R.id.loginProgress).setVisibility(View.VISIBLE);
+                inputLayout.setEndIconVisible(false);
+                login(userId.getText().toString());
+            }
+
+        });
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void onSuccess(User user) {
+                            Snackbar.make(v, "Login with " + user.getName(), Snackbar.LENGTH_LONG).show();
                             Log.d("login_comet", "Login Successful : " + user.toString());
                             redirectToGroupList();
                         }
@@ -113,5 +149,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         logout();
+    }
+    private void login(String username) {
+        logout();
+        if (CometChat.getLoggedInUser() == null) {
+            CometChat.login(username, Constants.AUTH_KEY, new CometChat.CallbackListener<User>() {
+
+                @Override
+                public void onSuccess(User user) {
+
+                    Log.d("login_comet", "Login Successful : " + user.toString());
+                    redirectToGroupList();
+                }
+
+                @Override
+                public void onError(CometChatException e) {
+                    inputLayout.setEndIconVisible(true);
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(MainActivity.this, "Login failed with exception: " + e.getMessage(), Toast.LENGTH_SHORT);
+                    Log.d("login_comet", "Login failed with exception: " + e.getMessage());
+                }
+            });
+        } else {
+            Log.d("login_comet", "User already logged in: ");
+            // User already logged in
+            redirectToGroupList();
+        }
     }
 }

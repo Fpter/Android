@@ -49,6 +49,7 @@ import screen.CometChatCallActivity;
 import screen.CometChatStartCallActivity;
 import screen.call.CometChatCallListScreen;
 import utils.CallUtils;
+import utils.Utils;
 
 public class MenuChatActivity extends AppCompatActivity {
     private TextView titleBar;
@@ -154,6 +155,7 @@ public class MenuChatActivity extends AppCompatActivity {
         CometChat.addCallListener(Constants.RECEIVE_CALL, new CometChat.CallListener() {
             @Override
             public void onIncomingCallReceived(Call call) {
+                if(Utils.isLoggedInUser((User)call.getCallInitiator())) return;
                 if (CometChat.getActiveCall()==null) {
                     if (call.getReceiverType().equals(CometChatConstants.RECEIVER_TYPE_USER)) {
                         CallUtils.startCallIntent(getApplicationContext(), (User) call.getCallInitiator(), call.getType(),
