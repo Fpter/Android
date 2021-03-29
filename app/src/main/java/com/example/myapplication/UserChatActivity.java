@@ -76,15 +76,19 @@ public class UserChatActivity extends AppCompatActivity {
 
         return super.onCreateView(name, context, attrs);
     }
-
+    String senderId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        }catch (Exception e) {}
         setContentView(R.layout.activity_user_chat);
         Intent intent = getIntent();
         ava = findViewById(R.id.iv_chat_avatar);
+         senderId = CometChat.getLoggedInUser().getUid();
+
         ava.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,7 +165,6 @@ public class UserChatActivity extends AppCompatActivity {
                 return true;
             }
         });
-        String senderId = CometChat.getLoggedInUser().getUid();
         ImageLoader imageLoader = new ImageLoader() {
             @Override
             public void loadImage(ImageView imageView, @Nullable String url, @Nullable Object payload) {
@@ -211,7 +214,8 @@ public class UserChatActivity extends AppCompatActivity {
                 messageList.add(new MessageWrapper((TextMessage) message));
                 UserUtils.markAsRead(message);
             }else if(message instanceof Call) {
-                messageList.add(new CallWrapper((Call)message));
+                if(((Call) message).getCallStatus().equals(CometChatConstants.CALL_STATUS_INITIATED)){
+                messageList.add(new CallWrapper((Call)message));}
             }
         }
         adapter.addToEnd(messageList, true);

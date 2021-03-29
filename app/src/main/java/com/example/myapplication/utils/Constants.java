@@ -1,9 +1,9 @@
 package com.example.myapplication.utils;
 
 public class Constants {
-    public static final String APP_ID = "30061b84286b56d";
+    public static final String APP_ID = "31420dd91d0c742";
     public static final String REGION = "US";
-    public static final String AUTH_KEY = "04e1edf735e99a7c52e57034c422d58d283b3ee1";
+    public static final String AUTH_KEY = "9b439a048b047add2ded2367378ad1a68de603b3";
 
     public static final String GROUP_ID = "GROUP_ID";
     public static final String GROUP_NAME = "GROUP_NAME";

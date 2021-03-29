@@ -33,6 +33,7 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
+import java.util.Objects;
 
 import adapter.TabAdapter;
 import screen.call.AllCall;
@@ -49,7 +50,9 @@ public class NewCallList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
-        getSupportActionBar().hide(); // hide the title bar
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        }catch (Exception e) {}
         setContentView(R.layout.fragment_user_list_screen);
         rv_user_list = findViewById(R.id.rv_user_list);
         shimmerFrameLayout = findViewById(R.id.shimmer_layout);

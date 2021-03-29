@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import adapter.CallHistoryAdapter;
 import constant.StringContract;
@@ -111,7 +113,10 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        }catch (Exception e) {}
         setContentView(R.layout.activity_user_detail_screen);
         fontUtils= FontUtils.getInstance(this);
         initComponent();
@@ -135,7 +140,10 @@ public class CometChatUserDetailScreenActivity extends AppCompatActivity {
         divider3 = findViewById(R.id.divider_3);
 
 //        setSupportActionBar(toolbar);
-         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        try {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        }catch (Exception e) {}
 
         addBtn.setTypeface(fontUtils.getTypeFace(FontUtils.robotoRegular));
 

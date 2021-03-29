@@ -27,7 +27,10 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+//        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        }catch (Exception e) {}
         setContentView(R.layout.activity_dashboard);
 
         // Animations

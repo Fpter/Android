@@ -31,7 +31,9 @@ public class CreateUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        }catch (Exception e) {}
         setContentView(R.layout.activity_create_user);
         username = findViewById(R.id.username);
         fullname = findViewById(R.id.fullname);

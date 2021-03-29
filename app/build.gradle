@@ -8,7 +8,7 @@ android {
     compileSdkVersion 30
     defaultConfig {
         applicationId "com.cometchat.pro.androiduikit"
-        minSdkVersion 28
+        minSdkVersion 27
         targetSdkVersion 30
         versionCode 1
         renderscriptSupportModeEnabled true

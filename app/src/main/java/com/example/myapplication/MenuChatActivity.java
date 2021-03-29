@@ -44,6 +44,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.Objects;
 
 import screen.CometChatCallActivity;
 import screen.CometChatStartCallActivity;
@@ -62,8 +63,10 @@ public class MenuChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
-        getSupportActionBar().hide(); // hide the title bar
-
+//        getSupportActionBar().hide(); // hide the title bar
+        try {
+            Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
+        }catch (Exception e) {}
          int limit = 50;
 //        ConversationsRequest conversationsRequest = new ConversationsRequest.ConversationsRequestBuilder()
 //                .setLimit(50)
