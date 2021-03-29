@@ -123,8 +123,7 @@ public class MyMissedCall extends Fragment {
         for(BaseMessage baseMessage: baseMessages) {
             Call call = (Call) baseMessage;
             if(!((User) call.getCallInitiator()).getUid().equals(loggedInUid)){
-                if(call.getCallStatus().equals(CometChatConstants.CALL_STATUS_CANCELLED)
-                || call.getCallStatus().equals(CometChatConstants.CALL_STATUS_UNANSWERED)) {
+                if(call.getCallStatus().equals(CometChatConstants.CALL_STATUS_UNANSWERED)) {
                     filteredList.add(baseMessage);
                 }
             }
