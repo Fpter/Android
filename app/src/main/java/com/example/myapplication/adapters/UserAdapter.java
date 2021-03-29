@@ -117,6 +117,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                                         CallUtils.initiateCall(v.getContext(), user.getUid(), CometChatConstants.RECEIVER_TYPE_USER, CometChatConstants.CALL_TYPE_VIDEO);
 
                                     }
+                                }).setNeutralButton("Message", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        UserChatActivity.start(context, user.getUid(), user.getName(), user.getAvatar());
+                                    }
                                 })
                             // Add customization options here
                             .show();
