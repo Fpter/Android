@@ -1,8 +1,10 @@
 package com.example.myapplication;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,14 +13,19 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.cometchat.pro.constants.CometChatConstants;
+import com.cometchat.pro.core.Call;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.User;
 import com.example.myapplication.utils.Constants;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.lang.reflect.Constructor;
 import java.util.Objects;
+
+import utils.CallUtils;
 
 public class CreateUserActivity extends AppCompatActivity {
     public static void start(Context context) {
@@ -41,6 +48,7 @@ public class CreateUserActivity extends AppCompatActivity {
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                createBtn.setClickable(false);
                 String apiKey = Constants.AUTH_KEY; // Replace with your API Key.
                 User user = new User();
                 user.setUid(username.getText().toString()); // Replace with your uid for the user to be created.
@@ -57,6 +65,14 @@ public class CreateUserActivity extends AppCompatActivity {
                     @Override
                     public void onError(CometChatException e) {
                         Toast.makeText(v.getContext(), "fail", Toast.LENGTH_LONG);
+                        new MaterialAlertDialogBuilder(v.getContext()).setTitle("Error").setMessage(e.getDetails())
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                createBtn.setClickable(true);
+                                dialog.dismiss();
+                            }
+                        }).show();
                         Log.e("createUser", e.getMessage());
                     }
                 });

@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -22,10 +23,12 @@ import com.cometchat.pro.core.UsersRequest;
 import com.cometchat.pro.exceptions.CometChatException;
 import com.cometchat.pro.models.Conversation;
 import com.cometchat.pro.models.User;
+import com.example.myapplication.NewCallList;
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.ConversationAdapter;
 import com.example.myapplication.adapters.UserAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -39,6 +42,7 @@ import java.util.Objects;
 public class HomeFragment extends Fragment {
     private ImageView backBtn;
     private ShimmerFrameLayout shimmer_layout;
+    private FloatingActionButton addConversation;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -89,6 +93,14 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         EditText search_user = view.findViewById(R.id.search_user);
         shimmer_layout = view.findViewById(R.id.shimmer_layout);
+        addConversation = view.findViewById(R.id.floating_action_button);
+        addConversation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewCallList.class);
+                startActivity(intent);
+            }
+        });
         search_user.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

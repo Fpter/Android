@@ -80,37 +80,19 @@
             android:layout_height="wrap_content"/>
 
     </RelativeLayout>
-
-
-
-    <Button
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_margin="5dp"
-        android:background="#fff"
-        android:backgroundTint="#2196F3"
-        android:elevation="0dp"
-        android:text="Forget password?" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/submitBtn"
+        android:id="@+id/signupbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-
-        android:backgroundTint="#2196F3"
-        android:text="Login"
-        android:textColor="@color/white" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:text="New user? SIGN UP"
-        android:id="@+id/signupbtn"
-        android:textColor="@color/black" />
 
+        android:textColor="@color/black" />
+    </RelativeLayout>
 
 </LinearLayout>

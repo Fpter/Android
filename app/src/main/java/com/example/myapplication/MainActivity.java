@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews() {
         TextInputEditText userId = findViewById(R.id.userID);
-        Button loginBtn = findViewById(R.id.submitBtn);
         Button signUpBtn = findViewById(R.id.signupbtn);
         progressBar = findViewById(R.id.loginProgress);
         inputLayout = findViewById(R.id.inputUID);
@@ -87,34 +86,7 @@ public class MainActivity extends AppCompatActivity {
                 CreateUserActivity.start(v.getContext());
             }
         });
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout();
-                String UID = userId.getText().toString(); // Replace with the UID of the user to login
-                if (CometChat.getLoggedInUser() == null) {
-                    CometChat.login(UID, Constants.AUTH_KEY, new CometChat.CallbackListener<User>() {
 
-                        @Override
-                        public void onSuccess(User user) {
-                            Snackbar.make(v, "Login with " + user.getName(), Snackbar.LENGTH_LONG).show();
-                            Log.d("login_comet", "Login Successful : " + user.toString());
-                            redirectToGroupList();
-                        }
-
-                        @Override
-                        public void onError(CometChatException e) {
-                            Toast.makeText(MainActivity.this, "Login failed with exception: " + e.getMessage(), Toast.LENGTH_SHORT);
-                            Log.d("login_comet", "Login failed with exception: " + e.getMessage());
-                        }
-                    });
-                } else {
-                    Log.d("login_comet", "User already logged in: ");
-                    // User already logged in
-                    redirectToGroupList();
-                }
-            }
-        });
     }
 
     private void redirectToGroupList() {

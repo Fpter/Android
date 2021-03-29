@@ -97,7 +97,7 @@ public class MoreInfoFragment extends Fragment {
         MaterialButton cancelBtn = dialog.findViewById(R.id.cancelBtn);
         MaterialButton updateBtn = dialog.findViewById(R.id.updateUserBtn);
         Avatar avatar_dialog = dialog.findViewById(R.id.user_avatar);
-        avatar_dialog.setAvatar(CometChat.getLoggedInUser().getAvatar());
+        avatar_dialog.setAvatar(CometChat.getLoggedInUser());
         TextInputEditText avatar_url_edt = dialog.findViewById(R.id.avatar_url_edt);
         TextInputEditText username_edt = dialog.findViewById(R.id.username_edt);
 
@@ -131,7 +131,9 @@ public class MoreInfoFragment extends Fragment {
         avatar_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                username_edt.setText(user.getName());
+                if(!user.getName().isEmpty()){
+                    username_edt.setText(user.getName());
+                }
                 dialog.show();
 
             }
