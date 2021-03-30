@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:tag="homeFragment"
     android:focusable="true"
     android:focusableInTouchMode="true"
@@ -63,10 +64,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
+        app:fabSize="mini"
+        android:backgroundTint="@color/white"
         android:layout_marginBottom="60dp"
 
 
-        android:src="@drawable/ic_add_24dp" />
+        android:src="@drawable/ic_create_24px" />
 
     <include layout="@layout/conversation_shimmer"/>
 </FrameLayout>

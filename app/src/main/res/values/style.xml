@@ -41,5 +41,13 @@
         <!-- Just to prove it's working -->
         <item name="android:background">#fff</item>
     </style>
+    <style name="Theme.App" parent="Widget.MaterialComponents.BottomAppBar">
 
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/colorPrimary</item>
+        <item name="colorSecondary">@color/colorPrimary</item>
+        <item name="colorOnSecondary">@color/colorPrimary</item>
+<!--        <item name="textAppearanceSubtitle1">@style/TextAppearance.App.Subtitle1</item>-->
+<!--        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.App.SmallComponent</item>-->
+    </style>
 </resources>

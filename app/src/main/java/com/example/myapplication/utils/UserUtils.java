@@ -22,6 +22,18 @@ import kotlin.collections.ArrayDeque;
 
 public class UserUtils {
     static User user_rs = null;
+    public static void logout() {
+        CometChat.logout(new CometChat.CallbackListener<String>() {
+            @Override
+            public void onSuccess(String successMessage) {
+                Log.d("logout", "Logout completed successfully");
+            }
+            @Override
+            public void onError(CometChatException e) {
+                Log.d("logout", "Logout failed with exception: " + e.getMessage());
+            }
+        });
+    }
     public static synchronized User getUserById(String UID) {
 
         CometChat.getUser(UID, new CometChat.CallbackListener<User>() {

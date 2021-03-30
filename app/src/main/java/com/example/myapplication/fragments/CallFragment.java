@@ -79,14 +79,7 @@ public class CallFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.call_screen, container, false);
-        ImageView addPhoneBtn = view.findViewById(R.id.add_phone_iv);
-        addPhoneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), NewCallList.class);
-                startActivity(intent);
-            }
-        });
+
 
         viewPager = view.findViewById(R.id.viewPager);
         tabLayout = view.findViewById(R.id.tabLayout);

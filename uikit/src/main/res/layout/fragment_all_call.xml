@@ -30,5 +30,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_phone_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        app:fabSize="mini"
+        android:backgroundTint="@color/textColorWhite"
+        android:layout_marginBottom="60dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+
+        android:src="@drawable/ic_add_ic_call_black_18dp" />
     <include layout="@layout/conversation_shimmer"/>
 </RelativeLayout>

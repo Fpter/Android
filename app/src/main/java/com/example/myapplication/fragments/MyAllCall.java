@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.cometchat.pro.constants.CometChatConstants;
@@ -26,10 +27,12 @@ import com.cometchat.pro.models.Conversation;
 import com.cometchat.pro.models.Group;
 import com.cometchat.pro.models.User;
 import com.cometchat.pro.uikit.CometChatCallList;
+import com.example.myapplication.NewCallList;
 import com.example.myapplication.R;
 import com.example.myapplication.adapters.CallAdapter;
 import com.example.myapplication.adapters.ConversationAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
@@ -104,7 +107,14 @@ public class MyAllCall extends Fragment {
         rvCallList = view.findViewById(com.cometchat.pro.uikit.R.id.callList_rv);
         noCallView = view.findViewById(com.cometchat.pro.uikit.R.id.no_call_vw);
         shimer_layout = view.findViewById(R.id.shimmer_layout);
-
+        FloatingActionButton addPhoneBtn = view.findViewById(R.id.add_phone_iv);
+        addPhoneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), NewCallList.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
     public void getCallList() {

@@ -106,7 +106,8 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/privacyAndSecurity"
+                android:contextClickable="true"
+                android:id="@+id/logoutBtn"
                 android:padding="10dp"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
@@ -115,13 +116,14 @@
                 <ImageView
                     android:layout_gravity="center"
                     android:id="@+id/ivSecurity"
-                    android:src="@drawable/ic_security"
+                    android:src="@drawable/ic_lock_24dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_toRightOf="@+id/ivSecurity"
                     android:layout_marginLeft="16dp"
-                    android:text="@string/privacy_and_security"
+                    android:text="Logout"
+                    android:textColor="@color/red"
                     android:layout_centerVertical="true"
                     android:textStyle="bold"
                     android:textSize="18sp"

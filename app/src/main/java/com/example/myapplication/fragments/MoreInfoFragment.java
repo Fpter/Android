@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -19,10 +20,13 @@ import android.widget.TextView;
 import com.cometchat.pro.core.CometChat;
 import com.cometchat.pro.models.User;
 import com.cometchat.pro.uikit.Avatar;
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.utils.UserUtils;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import screen.CometChatUserDetailScreenActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -83,6 +87,15 @@ public class MoreInfoFragment extends Fragment {
         RelativeLayout avatar_update = view.findViewById(R.id.user_container);
         Log.d("width",avatar_update.getWidth() +" ");
 
+        RelativeLayout logoutBtn = view.findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserUtils.logout();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        Dialog config
         Dialog dialog = new Dialog(getContext());
