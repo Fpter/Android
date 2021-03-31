@@ -20,7 +20,7 @@ public class CallWrapper implements IMessage {
 
     @Override
     public String getText() {
-        return call.getSender().getName() + " call " + call.getDeliveredToMeAt();
+        return call.getSender().getName() + " call ";
     }
 
     @Override

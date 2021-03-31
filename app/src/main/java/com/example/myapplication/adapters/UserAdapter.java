@@ -60,7 +60,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        private TextView username, lastMessage, messageTime;
+        private TextView username, lastMessage, messageTime, txt_user_message;
         private Avatar avatar;
         private ImageView callBtn;
         private RelativeLayout containerLayout;
@@ -71,13 +71,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             username = itemView.findViewById(R.id.txt_user_name);
             avatar = itemView.findViewById(R.id.av_user);
             containerLayout = itemView.findViewById(R.id.conversation_holder);
+            txt_user_message = itemView.findViewById(R.id.txt_user_message);
 
 //            callBtn = itemView.findViewById(R.id.call_iv);
         }
         public void bind(User user) {
             username.setText(user.getName());
             avatar.setAvatar(user);
-
+            txt_user_message.setText(user.getStatus());
+//            txt_user_message.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_tasks, 0,0,0);
             containerLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

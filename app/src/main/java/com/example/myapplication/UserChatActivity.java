@@ -87,7 +87,7 @@ public class UserChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_chat);
         Intent intent = getIntent();
         ava = findViewById(R.id.iv_chat_avatar);
-         senderId = CometChat.getLoggedInUser().getUid();
+        senderId = CometChat.getLoggedInUser().getUid();
 
         ava.setOnClickListener(new View.OnClickListener() {
             @Override

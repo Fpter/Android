@@ -83,7 +83,7 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        getUserList();
+        getUserList("");
     }
 
     @Override
@@ -114,23 +114,13 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-//                String keyword = search_user.getText().toString();
-//                UsersRequest usersRequest = new UsersRequest.UsersRequestBuilder().setSearchKeyword(keyword).setLimit(30).build();
-//                usersRequest.fetchNext(new CometChat.CallbackListener<List<User>>() {
-//                    @Override
-//                    public void onSuccess(List <User> list) {
-//                        updateUI(list);
-//                    }
-//                    @Override
-//                    public void onError(CometChatException e) {
-//                        Log.d("user_list", "User list fetching failed with exception: " + e.getMessage());
-//                    }
-//                });
+                String keyword = search_user.getText().toString();
+                getUserList(keyword);
             }
         });
         return view;
     }
-    private void getUserList() {
+    private void getUserList(String key) {
 
         ConversationsRequest conversationsRequest = new ConversationsRequest.ConversationsRequestBuilder().setConversationType(CometChatConstants.CONVERSATION_TYPE_USER).setLimit(50).build();
 
@@ -141,6 +131,13 @@ public class HomeFragment extends Fragment {
                 Log.d("conversation", conversations.size() + "");
                 shimmer_layout.stopShimmer();
                 shimmer_layout.setVisibility(View.GONE);
+
+                for(int i = conversations.size()-1;i>=0;i--) {
+                    if(!((User)conversations.get(i).getConversationWith()).getName().toLowerCase().contains(key.toLowerCase())) {
+                        conversations.remove(i);
+                    }
+                }
+
                 updateUI(conversations);
 
             }
