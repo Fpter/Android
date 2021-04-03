@@ -118,10 +118,10 @@ public class MenuChatActivity extends AppCompatActivity {
                         selectedFrag = new GroupFragment();
                         titleBar.setText("Group");
                         break;
-//                    case R.id.nav_message:
-//                        selectedFrag = new CallFragment();
-//                        titleBar.setText("Call");
-//                        break;
+                    case R.id.nav_message:
+                        selectedFrag = new CallFragment();
+                        titleBar.setText("Call");
+                        break;
                     case R.id.nav_info:
                         selectedFrag = new MoreInfoFragment();
                         titleBar.setText("Infomations");
